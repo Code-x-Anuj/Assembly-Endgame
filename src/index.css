@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hanken Grotesk", Arial, sans-serif;
+  background-color: #262626;
+  color: #D9D9D9;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  text-align: center;
+}
+
+header > h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #F9F4DA;
+}
+
+header > p {
+  font-size: 0.875rem;
+  max-width: 450px;
+  color: #8E8E8E;
+}
+
+section.game-status {
+  background-color: #10A95B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #F9F4DA;
+  border-radius: 4px;
+  margin-block: 30px;
+}
+
+section.game-status > p {
+  margin: 5px;
+}
+section.game-status > h2 {
+  font-size: 1.25rem;
+  margin: 5px
+}
+.chips{
+  padding: 5px;
+  margin: 2px;
+  border-radius: 6px;
+}
+.lang-section{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 350px;
+  justify-content: center;
+  margin-left: 45px;
+  margin-right: 45px;
+  margin-bottom: 20px;
+}
+.word{
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #F9F4DA;
+  background-color: #323232;
+  padding: 6px;
+  text-align: center;
+  border-bottom: 1px solid #F9F4DA;
+  margin-bottom: 36px;
+}
+.the-word{ 
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+section.keyboard{
+  max-width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.keys{
+  width: 40px;
+  height: 40px;
+  color: black;
+  background-color: #FCBA29;
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #D7D7D7;
+  border-radius: 4px;
+  cursor: pointer;
+}
