@@ -14,9 +14,10 @@ export default function AssemblyEndgame() {
 
   const theWordIs = theWord.map((letter, index) => 
   {
+    const isCorrectGuessed = guessedLetter.includes(letter)
     return(
     <h2 key={index} className="word" >
-      {letter.toUpperCase()}
+      {isCorrectGuessed? letter.toUpperCase() : ""}
     </h2> )
   }
   )
@@ -29,8 +30,8 @@ export default function AssemblyEndgame() {
     
     setGuessedLetter(prevLetters => 
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]) 
-    }
-    console.log(guessedLetter);
+  }
+  console.log(guessedLetter);
     
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   const inputKeys = alphabet.split("").map((key)=>{
@@ -85,6 +86,8 @@ export default function AssemblyEndgame() {
             <section className="keyboard">
               {inputKeys}
             </section>
+
+            <button className="new-game">New Game</button>
         </main>
     )
 }

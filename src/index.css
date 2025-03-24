@@ -85,6 +85,7 @@ section.keyboard{
   justify-content: center;
   align-items: center;
   gap: 5px;
+  margin-bottom: 50px;
 }
 .keys{
   width: 40px;
@@ -106,4 +107,15 @@ section.keyboard{
 }
 .red{
   background-color: red;
+}
+button.new-game {
+  background-color: #11B5E5;
+  border: 1px solid #D7D7D7;
+  border-radius: 4px;
+  width: 225px;
+  height: 40px;
+  padding: 6px 12px;
+  display: block;
+  margin-inline: auto;
+  cursor: pointer;
 }
