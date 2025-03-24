@@ -1,4 +1,5 @@
 import React from "react"
+import { clsx } from "clsx"
 import {languages} from "./languages.js"
 // console.log(languages)
 
@@ -6,28 +7,45 @@ import {languages} from "./languages.js"
 export default function AssemblyEndgame() {
 
   const [currentWord, setCurrentWord] = React.useState("react")
-  console.log(currentWord)
-
-  const alphabet = "abcdefghijklmnopqrstuvwxyz"
-  const inputKeys = alphabet.toUpperCase().split("").map((key)=>{
-    return(
-    <button key={key} className="keys">
-      {key}
-    </button>
-    )
-  }) 
-
-  const theWord = currentWord.toUpperCase().split("");
+  const [guessedLetter, setGuessedLetter] = React.useState([])
+  // console.log(currentWord)
+  const theWord = currentWord.split("");
   console.log(theWord)
+
   const theWordIs = theWord.map((letter, index) => 
   {
     return(
     <h2 key={index} className="word" >
-      {letter}
+      {letter.toUpperCase()}
     </h2> )
   }
   )
-  console.log(theWordIs)
+  // console.log(theWordIs)
+  
+
+  function getLetter(e) {
+    const letter = e.target.value
+    // console.log(letter)
+    
+    setGuessedLetter(prevLetters => 
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]) 
+    }
+    console.log(guessedLetter);
+    
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+  const inputKeys = alphabet.split("").map((key)=>{
+    // check if letter been guessed or not
+    const isGuessed = guessedLetter.includes(key) 
+    // check if guessed letter is correct or not(it should be guessed =true)
+    const isCorrect = isGuessed && currentWord.includes(key)
+    const isWrong = isGuessed && !currentWord.includes(key)
+    return(
+    <button key={key} className= {clsx("keys",{green: isCorrect, red: isWrong})}
+      value={key} onClick={getLetter} >
+      {key.toUpperCase()}
+    </button>
+    )
+  }) 
 
   const myLanguages = languages.map(lang => {
     const styles = {

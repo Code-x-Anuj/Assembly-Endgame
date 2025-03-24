@@ -96,4 +96,14 @@ section.keyboard{
   border: 1px solid #D7D7D7;
   border-radius: 4px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.keys:active {
+  transform: scale(0.95);
+}
+.green{
+  background-color: #10A95B;
+}
+.red{
+  background-color: red;
 }
