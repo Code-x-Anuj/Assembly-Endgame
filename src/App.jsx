@@ -1,59 +1,53 @@
 import React from "react"
 import { clsx } from "clsx"
 import {languages} from "./languages.js"
-import {getFarewellText } from "./utils.js"
-// console.log(languages)
+import {getFarewellText, getRandomWord } from "./utils.js" 
+import Confetti from "react-confetti"
+// console.log(getRandomWord())
 
 
 export default function AssemblyEndgame() {
 
-  const [currentWord, setCurrentWord] = React.useState("react")
+  const [currentWord, setCurrentWord] = React.useState( ()=> getRandomWord())
   const [guessedLetter, setGuessedLetter] = React.useState([])
   const currectWordLettersArr = currentWord.split("");
-  // console.log(currectWordLettersArr)
+  
+  // set new word for a new game
+  function setNewWord() {
+    setGuessedLetter([])
+    setCurrentWord(getRandomWord() )
+  }
+  console.log(currentWord)
 
   const wrongGuessedArr = guessedLetter.filter(ele => (!currentWord.includes(ele))  )
   const wrongGuessedCount = wrongGuessedArr.length
-  
-
   const isGameWon = currectWordLettersArr.every((letter) => guessedLetter.includes(letter) )
   const isGameLost = wrongGuessedCount >= languages.length-1 ;
   const isGameOver = isGameWon || isGameLost
-  // console.log("the game is over:" + isGameOver)
   const latestGuessedLetter = guessedLetter[(guessedLetter.length-1)]
   
-  function farewell() {
-    if (guessedLetter.length >=1 ) {
-      const latestGuessedLetter = guessedLetter[(guessedLetter.length-1)]
-      const toShowFarewell = !currectWordLettersArr.includes(latestGuessedLetter)
-      console.log(toShowFarewell)
-      return toShowFarewell;
-    }
-    return false ;
-  }
-  
 
+  
+// to display the letters of word & show answer word if game lost
   const theWordIs = currectWordLettersArr.map((letter, index) => 
-  {
-    const isCorrectGuessed = guessedLetter.includes(letter)
-    return(
-    <h2 key={index} className="word" >
-      {isCorrectGuessed? letter.toUpperCase() : ""}
-    </h2> )
-  }
+    {
+      const isCorrectGuessed = guessedLetter.includes(letter) || isGameLost
+      return(
+      <h2 key={index} className={clsx("word",{letterShowed:isGameLost && !guessedLetter.includes(letter) })} >
+        {isCorrectGuessed? letter.toUpperCase() : ""}
+      </h2> )
+    }
   )
   // console.log(theWordIs)
   
-
+// to set the clicked letter to guessedLetter
   function getLetter(e) {
     const letter = e.target.value
-    // console.log(letter)
-    
     setGuessedLetter(prevLetters => 
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]) 
   }
   // console.log(guessedLetter);
-    
+  // display keyboard & it's functionality 
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   const inputKeys = alphabet.split("").map((key)=>{
     // check if letter been guessed or not
@@ -74,7 +68,7 @@ export default function AssemblyEndgame() {
     </button>
     )
   }) 
-
+  // displaying the language
   const myLanguages = languages.map((lang, index )=> {
     const styles = {
       backgroundColor: lang.backgroundColor,
@@ -90,40 +84,56 @@ export default function AssemblyEndgame() {
         {lang.name}
       </span>
     )
-    
   })
   // console.log(myLanguages)
+  // to show farewell msg for every Language eliminated
+  function farewell() {
+    if (guessedLetter.length >=1 ) {
+      const latestGuessedLetter = guessedLetter[(guessedLetter.length-1)]
+      const toShowFarewell = !currectWordLettersArr.includes(latestGuessedLetter)
+      return toShowFarewell;
+    }
+    return false ;
+  }
   
   return (
         <main>
+          {
+            isGameWon && <Confetti
+              recycle = {false}
+              numberOfPieces={1000}
+            />
+          }
             <header>
               <h1>Assembly: Endgame</h1>
               <p>Guess the word within 8 attempts to keep the
                 programming world safe from Assembly!
               </p>
             </header>
-            <section 
-              aria-live="polite"
-              role="status"
-              className= {clsx("game-status",
+
+            <section className= {clsx("game-status",
                 {green: isGameWon,
                 red : isGameLost,
                 farewell: !isGameOver && farewell()} )
               }
+              aria-live="polite"
+              role="status"
             >
               <h2>{isGameWon && "You win!" } 
                 {isGameLost && "Game Over!"} 
                 {farewell() && !isGameOver && getFarewellText(languages[wrongGuessedCount-1].name) } 
               </h2>
               <p>{isGameWon && "Well done! 🎉"}
-                {isGameLost && "You lose! Better start learning Assembly"} 
+                {isGameLost && "You lose! Better start learning Assembly 😭"} 
               </p>
             </section>
+
             <section className="lang-section">
               {myLanguages}
             </section>
-            <section className="the-word">
-              {theWordIs}
+
+            <section className={clsx("the-word" )}>
+             {theWordIs}
             </section>
             
             {/* Combined visually-hidden aria-live region for status updates accessibilty */}
@@ -147,11 +157,12 @@ export default function AssemblyEndgame() {
                 }
               </p>
             </section>
+
             <section className="keyboard">
               {inputKeys}
             </section>
-
-            {isGameOver && <button className="new-game">New Game</button>}
+            
+            {isGameOver && <button onClick={()=>{setNewWord()}} className="new-game">New Game</button>}
         </main>
     )
 }

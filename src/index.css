@@ -103,6 +103,9 @@ span.chips.lost::before {
   justify-content: center;
   gap: 2px;
 }
+.letterShowed{
+  color: #EC5D49;
+}
 
 section.keyboard{
   max-width: 450px;
