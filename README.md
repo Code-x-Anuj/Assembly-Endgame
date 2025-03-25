@@ -1,12 +1,81 @@
-# React + Vite
+# Assembly: Endgame
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Assembly: Endgame is a word-guessing game built with React. Players must guess a randomly selected word within 8 attempts to prevent Assembly from taking over the programming world. Incorrect guesses eliminate programming languages one by one until the game is lost.
 
-Currently, two official plugins are available:
+## Features
+- **Interactive Word Guessing**: Users can guess letters to uncover the hidden word.
+- **Keyboard Input**: An on-screen keyboard allows letter selection.
+- **Game Over Conditions**: Lose when all attempts are used, win by correctly guessing the word.
+- **Dynamic Visual Feedback**:
+  - Correct guesses highlight letters.
+  - Incorrect guesses eliminate languages.
+  - Confetti animation on win.
+- **Farewell Messages**: Custom messages appear when programming languages are eliminated.
+- **New Game Option**: Restart the game anytime with a new word.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+- **React 19**
+- **Vite** (for fast development)
+- **clsx** (for conditional styling)
+- **react-confetti** (for win animations)
+- **ESLint** (for code linting and best practices)
 
-## Expanding the ESLint configuration
+## Installation & Setup
+To run the project locally:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/assembly-endgame.git
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd assembly-endgame
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+
+## Project Structure
+```
+assembly-endgame/
+├── src/
+│   ├── components/  # UI Components (if applicable)
+│   ├── languages.js  # Programming languages data
+│   ├── utils.js  # Helper functions
+│   ├── App.jsx  # Main game logic
+│   ├── index.jsx  # Entry point
+├── public/
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## Usage
+- Click letters to make guesses.
+- Track incorrect attempts with eliminated programming languages.
+- Win by guessing all letters correctly.
+- Lose when 8 incorrect guesses are made.
+- Click "New Game" to start over.
+
+## Accessibility
+- Uses `aria-live` for status updates.
+- Keyboard navigation is supported.
+- Visually hidden messages assist screen readers.
+
+
+## License
+This project is open-source under the [MIT License](LICENSE).
+
+## Author
+Created by **Anuj Maurya**.
+
+## Contributions
+Contributions are welcome! Feel free to fork the repo and submit a pull request.
+
+
