@@ -17,7 +17,7 @@ export default function AssemblyEndgame() {
     setGuessedLetter([])
     setCurrentWord(getRandomWord() )
   }
-  console.log(currentWord)
+  // console.log(currentWord)
 
   const wrongGuessedArr = guessedLetter.filter(ele => (!currentWord.includes(ele))  )
   const wrongGuessedCount = wrongGuessedArr.length
